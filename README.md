@@ -115,7 +115,7 @@ sed '/i$/d' names.txt
 sed 'd' names.txt
 ```
 
-# p/a/iコマンドを使う
+## p/a/iコマンドを使う
 ```bash
 # 3行目を2回表示する
 sed '3p' names.txt
