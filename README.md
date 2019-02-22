@@ -68,3 +68,49 @@ sedはパターンスペースを用いて操作を行っている.
 2. addressにマッチする？ → commandを実行  
 3. パターンスペースを表示  
 という流れになっている.
+
+## アドレスを使いこなす
+```bash
+# 3行目以外を削除
+sed '3!d' names.txt
+> 3 taro
+
+# 1行目と3行目を削除
+sed '1d;3d' names.txt
+> 2 koji
+> 4 hanako
+> 5 yasuda
+
+# 1行目から3行目までを削除
+sed '1,3d' names.txt
+> 4 hanako
+> 5 yasuda
+
+# 1行目を削除してから2行飛ばしで削除.
+# つまり, 奇数行目を削除.
+sed '1~2d' names.txt
+> 2 koji
+> 4 hanako
+
+# 最後の行を削除
+sed '$d' names.txt
+> 1 taguchi
+> 2 koji
+> 3 taro
+> 4 hanako
+
+# 3行目から最後の行までを削除
+# $が最後の意味
+sed '3,$d' names.txt
+> 1 taguchi
+> 2 koji
+
+# iで終わる行は削除
+sed '/i$/d' names.txt
+> 3 taro
+> 4 hanako
+> 5 yasuda
+
+# addressは省略もできるのでaddressを書かないと全削除
+sed 'd' names.txt
+```
