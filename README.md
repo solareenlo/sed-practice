@@ -114,3 +114,56 @@ sed '/i$/d' names.txt
 # addressは省略もできるのでaddressを書かないと全削除
 sed 'd' names.txt
 ```
+
+# p/a/iコマンドを使う
+```bash
+# 3行目を2回表示する
+sed '3p' names.txt
+> 1 taguchi
+> 2 koji
+> 3 taro
+> 3 taro
+> 4 hanako
+> 5 yasuda
+
+# 3行目だけを表示する
+sed -n '3p' names.txt
+> 3 taro
+
+# 3行目で処理を終わる
+sed '3q' names.txt
+> 1 taguchi
+> 2 koji
+> 3 taro
+
+# 1行目の前に文字列をinsertする
+sed '1i\--- start ---' names.txt
+> --- start ---
+> 1 taguchi
+> 2 koji
+> 3 taro
+> 3 taro
+> 4 hanako
+> 5 yasuda
+
+# 最終行にも文字列を挿入する
+sed -e '1i\--- start ---' -e '$a\--- end ---' names.txt
+> --- start ---
+> 1 taguchi
+> 2 koji
+> 3 taro
+> 3 taro
+> 4 hanako
+> 5 yasuda
+> --- end ---
+
+# 最終行に空の文字列を挿入する
+sed '/^$/i' names.txt
+> 1 taguchi
+> 2 koji
+> 3 taro
+> 3 taro
+> 4 hanako
+> 5 yasuda
+>
+```
