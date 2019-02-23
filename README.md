@@ -167,3 +167,25 @@ sed '/^$/i' names.txt
 > 5 yasuda
 >
 ```
+
+# 1文字ずつの文字置換にはyを使う
+```bash
+# 1文字置換はyを使い,
+# tをTに置換する.
+sed 'y/t/T/' names.txt
+> 1 Taguchi
+> 2 koji
+> 3 Taro
+> 4 hanako
+> 5 yasuda
+
+# 複数個の文字を1文字ずつ置換する
+# t -> T, o -> O
+# という風に1文字ずつ対応して置換してくれる.
+sed'y/to/TO/' names.txt
+> 1 Taguchi
+> 2 kOji
+> 3 TarO
+> 4 hanakO
+> 5 yasuda
+```
