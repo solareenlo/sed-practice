@@ -272,3 +272,43 @@ sed 's/\([0-5]\) \(.*\)/\2 【\1】/' items.txt
 > takahashi cherry, pear, kiwi 【4】
 > yasuda cherrry, Cherry 【5】
 ```
+
+## ホールドスペースを使う
+ホールドスペースとはパターンスペースのさらに奥にある裏バッファーのようなもの  
+- h(hold): パターンスペースの内容をホールドスペースにコピー  
+- g(get): ホールドスペースの内容をパターンスペースにコピー  
+- x(exchange): パターンスペースとホールドスペースの内容を交換  
+パターンスペースは1行ずつどんどん更新されてく.  
+ホールドスペースに一時的に情報を格納しておく.  
+そうすることでより複雑な文字列操作を行う.
+```bash
+cat style.css
+> #main {
+>   color: red;
+>   font-weight: bold;
+>   font-size: 14px;
+>   background: green;
+> }
+
+vim ex2.sed
+i
+# color change
+/color: / {
+  h // holdが起こり, ホールドスペースに color: red; がコピーされる
+  s/color: /background: / // 置換が起こり, パターンスペースで, color: red; が background: red; に置換される
+  x // exchangeが起こり, ホールドスペースに background: red; が, パターンスペースに color: red; が格納される
+} // パターンスペースの color: red; が表示される
+/background: / {
+  g // getが起こり, ホールドスペースにある background: red; が, パターンスペースにコピーされる
+} // パターンスペースの backgroud: red; が表示される
+ESC
+:wq
+
+sed -f ex2.sed style.css
+> #main {
+>   color: red;
+>   font-weight: bold;
+>   font-size: 14px;
+>   background: red;
+> }
+```
