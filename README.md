@@ -244,3 +244,31 @@ sed 's/[aA]pple/Ringo/ig' items.txt
 4 takahashi cherry, pear, kiwi
 5 yasuda cherrry, Cherry
 ```
+
+# &や\1を使って置換する
+```bash
+cat items.txt
+1 taguchi Apple, apple, apple, grape
+2 fkoji Banana, apple, Apple, lemon
+3 dotinstall Grape, apple, strawberry
+4 takahashi cherry, pear, kiwi
+5 yasuda cherrry, Cherry
+
+# 検索した結果は&に入る
+sed 's/[0-5]/【&】/' items.txt
+【1】 taguchi Apple, apple, apple, grape
+【2】 fkoji Banana, apple, Apple, lemon
+【3】 dotinstall Grape, apple, strawberry
+【4】 takahashi cherry, pear, kiwi
+【5】 yasuda cherrry, Cherry
+
+# 複数個検索した結果を用いる場合は
+# ()で包んでから, \1, \2...を使う
+sed 's/\([0-5]\) \(.*\)/\2 【\1】/' items.txt
+# 1-5までの数字は\1に, 文字列は\2に入っている
+ taguchi Apple, apple, apple, grape【1】
+ fkoji Banana, apple, Apple, lemon【2】
+ dotinstall Grape, apple, strawberry【3】
+ takahashi cherry, pear, kiwi 【4】
+ yasuda cherrry, Cherry 【5】
+```
