@@ -193,82 +193,82 @@ sed'y/to/TO/' names.txt
 ## 文字列置換にはsコマンドを使う
 ```bash
 cat items.txt
-1 taguchi Apple, apple, apple, grape
-2 fkoji Banana, apple, Apple, lemon
-3 dotinstall Grape, apple, strawberry
-4 takahashi cherry, pear, kiwi
-5 yasuda cherrry, Cherry
+> 1 taguchi Apple, apple, apple, grape
+> 2 fkoji Banana, apple, Apple, lemon
+> 3 dotinstall Grape, apple, strawberry
+> 4 takahashi cherry, pear, kiwi
+> 5 yasuda cherrry, Cherry
 
 # 上記のitems.txtのappleをAppleに置換する
 # ただし, 初めの1つにだけしか効きません
 sed 's/apple/Apple' items.txt
-1 taguchi Apple, Apple, apple, grape
-2 fkoji Banana, apple, Apple, lemon
-3 dotinstall Grape, Apple, strawberry
-4 takahashi cherry, pear, kiwi
-5 yasuda cherrry, Cherry
+> 1 taguchi Apple, Apple, apple, grape
+> 2 fkoji Banana, apple, Apple, lemon
+> 3 dotinstall Grape, Apple, strawberry
+> 4 takahashi cherry, pear, kiwi
+> 5 yasuda cherrry, Cherry
 
 # なので, 全てのappleをAppleに変えたいときは
 # gというフラグを用いる
 sed 's/apple/Apple/g' items.txt
-1 taguchi Apple, Apple, Apple, grape
-2 fkoji Banana, Apple, Apple, lemon
-3 dotinstall Grape, Apple, strawberry
-4 takahashi cherry, pear, kiwi
-5 yasuda cherrry, Cherry
+> 1 taguchi Apple, Apple, Apple, grape
+> 2 fkoji Banana, Apple, Apple, lemon
+> 3 dotinstall Grape, Apple, strawberry
+> 4 takahashi cherry, pear, kiwi
+> 5 yasuda cherrry, Cherry
 
 # 2番目にマッチするものを置換するときは
 # 2というフラグを用いる
 sed 's/apple/Apple/2' items.txt
-1 taguchi Apple, apple, Apple, grape
-2 fkoji Banana, Apple, Apple, lemon
-3 dotinstall Grape, Apple, strawberry
-4 takahashi cherry, pear, kiwi
-5 yasuda cherrry, Cherry
+> 1 taguchi Apple, apple, Apple, grape
+> 2 fkoji Banana, Apple, Apple, lemon
+> 3 dotinstall Grape, Apple, strawberry
+> 4 takahashi cherry, pear, kiwi
+> 5 yasuda cherrry, Cherry
 
 # 大文字小文字を区別させないときは
 # iというフラグを用いる
 # フラグは組み合わせることもできる
 sed 's/apple/Ringo/ig' items.txt
-1 taguchi Ringo, Ringo, Ringo, grape
-2 fkoji Banana, Ringo, Ringo, lemon
-3 dotinstall Grape, Ringo, strawberry
-4 takahashi cherry, pear, kiwi
-5 yasuda cherrry, Cherry
+> 1 taguchi Ringo, Ringo, Ringo, grape
+> 2 fkoji Banana, Ringo, Ringo, lemon
+> 3 dotinstall Grape, Ringo, strawberry
+> 4 takahashi cherry, pear, kiwi
+> 5 yasuda cherrry, Cherry
 
 # 正規表現も使えます
 sed 's/[aA]pple/Ringo/ig' items.txt
-1 taguchi Ringo, Ringo, Ringo, grape
-2 fkoji Banana, Ringo, Ringo, lemon
-3 dotinstall Grape, Ringo, strawberry
-4 takahashi cherry, pear, kiwi
-5 yasuda cherrry, Cherry
+> 1 taguchi Ringo, Ringo, Ringo, grape
+> 2 fkoji Banana, Ringo, Ringo, lemon
+> 3 dotinstall Grape, Ringo, strawberry
+> 4 takahashi cherry, pear, kiwi
+> 5 yasuda cherrry, Cherry
 ```
 
-# &や\1を使って置換する
+## &や\1を使って置換する
 ```bash
 cat items.txt
-1 taguchi Apple, apple, apple, grape
-2 fkoji Banana, apple, Apple, lemon
-3 dotinstall Grape, apple, strawberry
-4 takahashi cherry, pear, kiwi
-5 yasuda cherrry, Cherry
+> 1 taguchi Apple, apple, apple, grape
+> 2 fkoji Banana, apple, Apple, lemon
+> 3 dotinstall Grape, apple, strawberry
+> 4 takahashi cherry, pear, kiwi
+> 5 yasuda cherrry, Cherry
 
 # 検索した結果は&に入る
 sed 's/[0-5]/【&】/' items.txt
-【1】 taguchi Apple, apple, apple, grape
-【2】 fkoji Banana, apple, Apple, lemon
-【3】 dotinstall Grape, apple, strawberry
-【4】 takahashi cherry, pear, kiwi
-【5】 yasuda cherrry, Cherry
+> 【1】 taguchi Apple, apple, apple, grape
+> 【2】 fkoji Banana, apple, Apple, lemon
+> 【3】 dotinstall Grape, apple, strawberry
+> 【4】 takahashi cherry, pear, kiwi
+> 【5】 yasuda cherrry, Cherry
 
 # 複数個検索した結果を用いる場合は
 # ()で包んでから, \1, \2...を使う
 sed 's/\([0-5]\) \(.*\)/\2 【\1】/' items.txt
 # 1-5までの数字は\1に, 文字列は\2に入っている
- taguchi Apple, apple, apple, grape【1】
- fkoji Banana, apple, Apple, lemon【2】
- dotinstall Grape, apple, strawberry【3】
- takahashi cherry, pear, kiwi 【4】
- yasuda cherrry, Cherry 【5】
+> taguchi Apple, apple, apple, grape【1】
+> fkoji Banana, apple, Apple, lemon【2】
+> dotinstall Grape, apple, strawberry【3】
+> takahashi cherry, pear, kiwi 【4】
+> yasuda cherrry, Cherry 【5】
 ```
