@@ -168,7 +168,7 @@ sed '/^$/i' names.txt
 >
 ```
 
-# 1文字ずつの文字置換にはyを使う
+## 1文字ずつの文字置換にはyコマンドを使う
 ```bash
 # 1文字置換はyを使い,
 # tをTに置換する.
@@ -188,4 +188,59 @@ sed'y/to/TO/' names.txt
 > 3 TarO
 > 4 hanakO
 > 5 yasuda
+```
+
+## 文字列置換にはsコマンドを使う
+```bash
+cat items.txt
+1 taguchi Apple, apple, apple, grape
+2 fkoji Banana, apple, Apple, lemon
+3 dotinstall Grape, apple, strawberry
+4 takahashi cherry, pear, kiwi
+5 yasuda cherrry, Cherry
+
+# 上記のitems.txtのappleをAppleに置換する
+# ただし, 初めの1つにだけしか効きません
+sed 's/apple/Apple' items.txt
+1 taguchi Apple, Apple, apple, grape
+2 fkoji Banana, apple, Apple, lemon
+3 dotinstall Grape, Apple, strawberry
+4 takahashi cherry, pear, kiwi
+5 yasuda cherrry, Cherry
+
+# なので, 全てのappleをAppleに変えたいときは
+# gというフラグを用いる
+sed 's/apple/Apple/g' items.txt
+1 taguchi Apple, Apple, Apple, grape
+2 fkoji Banana, Apple, Apple, lemon
+3 dotinstall Grape, Apple, strawberry
+4 takahashi cherry, pear, kiwi
+5 yasuda cherrry, Cherry
+
+# 2番目にマッチするものを置換するときは
+# 2というフラグを用いる
+sed 's/apple/Apple/2' items.txt
+1 taguchi Apple, apple, Apple, grape
+2 fkoji Banana, Apple, Apple, lemon
+3 dotinstall Grape, Apple, strawberry
+4 takahashi cherry, pear, kiwi
+5 yasuda cherrry, Cherry
+
+# 大文字小文字を区別させないときは
+# iというフラグを用いる
+# フラグは組み合わせることもできる
+sed 's/apple/Ringo/ig' items.txt
+1 taguchi Ringo, Ringo, Ringo, grape
+2 fkoji Banana, Ringo, Ringo, lemon
+3 dotinstall Grape, Ringo, strawberry
+4 takahashi cherry, pear, kiwi
+5 yasuda cherrry, Cherry
+
+# 正規表現も使えます
+sed 's/[aA]pple/Ringo/ig' items.txt
+1 taguchi Ringo, Ringo, Ringo, grape
+2 fkoji Banana, Ringo, Ringo, lemon
+3 dotinstall Grape, Ringo, strawberry
+4 takahashi cherry, pear, kiwi
+5 yasuda cherrry, Cherry
 ```
