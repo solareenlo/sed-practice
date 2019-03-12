@@ -157,15 +157,15 @@ sed -e '1i\--- start ---' -e '$a\--- end ---' names.txt
 > 5 yasuda
 > --- end ---
 
-# 最終行に空の文字列を挿入する
-sed '/^$/i' names.txt
+# 最終行の空の文字列を削除する
+# /^$/ は正規表現で空行を表す
+sed '/^$/d' names.txt
 > 1 taguchi
 > 2 koji
 > 3 taro
 > 3 taro
 > 4 hanako
 > 5 yasuda
->
 ```
 
 ## 1文字ずつの文字置換にはyコマンドを使う
