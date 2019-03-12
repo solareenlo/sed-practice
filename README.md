@@ -285,7 +285,7 @@ sed 's/\([0-5]\) \(.*\)/\2 【\1】/' items.txt
 そうすることでより複雑な文字列操作を行う.
 ```bash
 cat style.css
-> #main {
+> main {
 >   color: red;
 >   font-weight: bold;
 >   font-size: 14px;
